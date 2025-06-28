@@ -8,6 +8,7 @@ import { computed, ref } from 'vue';
 
 const tasks = ref<Task[]>([]);
 const filter = ref<TaskFilter>('all');
+
 const filteredTasks = computed(() => {
     switch (filter.value) {
         case 'all':
