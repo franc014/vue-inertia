@@ -7,6 +7,8 @@ import { createApp, h } from 'vue';
 import { createPinia } from 'pinia';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
+import { initializeCart } from './composables/useCart';
+
 
 
 const pinia = createPinia();
@@ -28,12 +30,14 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
-    setup({ el, App, props, plugin }) {
+     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
             .use(pinia)
             .mount(el);
+        //instead call a init function in the pinia cart store
+        initializeCart();
     },
     progress: {
         color: '#4B5563',
@@ -42,3 +46,5 @@ createInertiaApp({
 
 // This will set light / dark mode on page load...
 //initializeTheme();
+
+//initializeCart();

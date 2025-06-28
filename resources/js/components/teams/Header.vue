@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTeamStore } from '@/stores/TeamStore';
+import { Link } from '@inertiajs/vue3';
 
 const team = useTeamStore();
 
@@ -32,6 +33,9 @@ const spotsAvailable = team.spotsAvailable;
                 </svg>
 
                 <h3>{{ team.name }}</h3>
+
+                <Link href="/food" class="bg-indigo-500 px-4 py-2 text-white">Foodd</Link>
+
                 <div class="absolute -top-2 -right-4 flex h-5 w-5 items-center justify-center rounded-full bg-green-600 text-xs text-white">
                     {{ team.members.length }}
                 </div>

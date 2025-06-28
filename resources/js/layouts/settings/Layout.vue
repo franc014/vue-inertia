@@ -3,7 +3,7 @@ import Heading from '@/components/Heading.vue';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { type NavItem } from '@/types';
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 
 const sidebarNavItems: NavItem[] = [
     {
@@ -22,9 +22,23 @@ const sidebarNavItems: NavItem[] = [
 
 const page = usePage();
 
-console.log(page.props);
-
 const currentPath = page.props.ziggy?.location ? new URL(page.props.ziggy.location).pathname : '';
+
+router.on('start', (event) => {
+    console.log(`Starting a visit to ${event.detail.visit.url}`);
+});
+
+router.on('finish', (event) => {
+    console.log(`Finished a visit to ${event.detail.visit.url}`);
+});
+
+/* onMounted(() => {
+    const cart = useCartStore();
+    if (!cart.id) {
+        cart.init('anewcart');
+    }
+    console.log('cart id', cart.id);
+}); */
 </script>
 
 <template>

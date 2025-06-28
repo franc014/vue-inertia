@@ -22,6 +22,7 @@ console.log(team.name);
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     </Head>
+
     <div
         class="content container mx-auto flex min-h-screen flex-col space-y-6 bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]"
     >

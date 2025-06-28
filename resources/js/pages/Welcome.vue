@@ -3,8 +3,11 @@ import FilterButton from '@/components/FilterButton.vue';
 import TaskForm from '@/components/TaskForm.vue';
 import TaskList from '@/components/TaskList.vue';
 import { Task, TaskFilter } from '@/components/types';
-import { Head } from '@inertiajs/vue3';
+import Layout from '@/layouts/settings/Layout.vue';
+import { Head, Link } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
+
+defineOptions({ layout: Layout });
 
 const tasks = ref<Task[]>([]);
 const filter = ref<TaskFilter>('all');
@@ -62,6 +65,10 @@ function setFilter(value: TaskFilter) {
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     </Head>
+    <header class="flex gap-2">
+        <Link href="/" class="btn btn-primary">Home</Link>
+        <Link href="/products" class="btn btn-primary">Products</Link>
+    </header>
     <div class="content flex min-h-screen flex-col space-y-6 bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
         <div class="mx-auto w-1/2 space-y-3 lg:block">
             <TaskForm @add-task="addTask" />
