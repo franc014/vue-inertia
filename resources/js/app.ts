@@ -6,8 +6,9 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { createPinia } from 'pinia';
 import { ZiggyVue } from 'ziggy-js';
-import { initializeTheme } from './composables/useAppearance';
-import { initializeCart } from './composables/useCart';
+//import { initializeTheme } from './composables/useAppearance';
+import { useCartStore } from './stores/cartStore';
+
 
 
 
@@ -36,8 +37,9 @@ createInertiaApp({
             .use(ZiggyVue)
             .use(pinia)
             .mount(el);
+        const cartPinia = useCartStore();
         //instead call a init function in the pinia cart store
-        initializeCart();
+        cartPinia.init();
     },
     progress: {
         color: '#4B5563',

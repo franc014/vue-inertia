@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Team;
 use App\Models\TeamMember;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -25,6 +27,32 @@ Route::get('/products', function () {
         'products' => Product::all(),
     ]);
 });
+
+Route::post('/cart/create', function () {
+
+    $UICartId = request('id');
+
+    Log::info('UICartId', [$UICartId]);
+
+    return Cart::create([
+        'ui_cart_id' => $UICartId
+    ]);
+
+})->name('cart.create');
+
+Route::post('/cart/show', function () {
+
+    $UICartId = request('id');
+
+    $cart = Cart::where('ui_cart_id', $UICartId)->first();
+    //Log::info('UICartId', [$UICartId]);
+
+    //of course, get items when they exist, now just for test return empty
+    return ['ui_cart_id' => $cart->ui_cart_id, 'items'=> []];
+
+})->name('cart.show');
+
+
 
 
 
