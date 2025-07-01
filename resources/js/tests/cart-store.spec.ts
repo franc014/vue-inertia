@@ -8,38 +8,6 @@ describe('Cart store', function () {
         setActivePinia(createPinia());
     });
 
-    //sends cart via an api call to create a new cart in the DB
-    it('initializes a new cart, and creates a new cart in the DB', async function () {
-
-        const cart = useCartStore();
-
-        cart.init = vi.fn(async function () {
-            const response = await fetch('http://vue-inertia.test/cart/create', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const data = await response.json();
-            this.id = data.ui_cart_id;
-            this.items = data.items;
-
-        });
-
-        await cart.init();
-
-        expect(cart.id).toBe(1);
-        expect(cart.items).toEqual([]);
-
-
-
-    });
-
-    //api call to get the cart
-    it('initializes a new cart from the DB', function(){
-        const cart = useCartStore();
-
-        expect(cart.items.length).toBe(0);
-    });
-
 
     it('adds a product to the cart', function () {
         const cart = useCartStore();

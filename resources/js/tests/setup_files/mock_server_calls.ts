@@ -3,13 +3,10 @@ import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
 
 
-const cart =
-{
+const cart ={
     ui_cart_id: 1,
     items: []
 };
-
-
 
 export const restHandlers = [
     http.post('http://vue-inertia.test/cart/create', () => {

@@ -69,25 +69,22 @@ export const useCartStore = defineStore('cart', {
             }
 
         },
-        addItem(item: CartItem) {
+        async addItem(data: object) {
 
-            const index = this.items.findIndex(i => i.slug === item.slug);
-            if (index !== -1) {
-                this.updateItemQuantity(item.slug, item.quantity);
-                return;
-            }
 
-            const cartItem = {
-                title: item.title,
-                slug: item.slug,
-                product_id: item.product_id,
-                price: item.price,
-                tax: item.tax,
-                quantity: item.quantity,
-                total: item.total,
-                total_with_tax: item.total_with_tax
-            };
-            this.items.push(cartItem);
+
+            console.log({data});
+
+
+            const cartDB = await axios.post(route('cart.items.store', { cart: this.id }), data);
+
+            this.items = cartDB.data.items;
+
+            localStorage.setItem('cart', JSON.stringify({
+                id: this.id,
+                items: this.items,
+            }));
+
         },
 
         updateItemQuantity(slug: string, quantity: number) {

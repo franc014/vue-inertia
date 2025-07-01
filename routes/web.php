@@ -42,15 +42,36 @@ Route::post('/cart/create', function () {
 
 Route::post('/cart/show', function () {
 
-    $UICartId = request('id');
+    $cart = Cart::byUICartId(request('id'))->first();
 
-    $cart = Cart::where('ui_cart_id', $UICartId)->first();
-    //Log::info('UICartId', [$UICartId]);
-
-    //of course, get items when they exist, now just for test return empty
     return ['ui_cart_id' => $cart->ui_cart_id, 'items'=> []];
 
 })->name('cart.show');
+
+Route::post('/cart/{cart:ui_cart_id}/items/store', function (Cart $cart) {
+
+    //$cart = Cart::byUICartId(request('ui_cart_id'))->first();
+
+
+    $totalTaxes = collect(request('taxes'));
+
+    $cart->addItem([
+        'product_id' => request('product_id'),
+        'title' => request('title'),
+        'description' => request('description'),
+        'slug' => request('slug'),
+        'quantity' => request('quantity'),
+        'price' => request('price'),
+        'taxes' => request('taxes'),
+        'total' => request('price') * request('quantity'),
+        'total_with_taxes' => request('price') * request('quantity') * (1 + $totalTaxes->sum('value')),
+    ]);
+
+    return ['ui_cart_id' => $cart->ui_cart_id, 'items'=> $cart->items];
+
+
+})->name('cart.items.store');
+
 
 
 

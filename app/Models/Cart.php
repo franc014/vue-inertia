@@ -9,4 +9,19 @@ class Cart extends Model
 {
     /** @use HasFactory<\Database\Factories\CartFactory> */
     use HasFactory;
+
+    public function scopeByUICartId($query, $uiCartId)
+    {
+        return $query->where('ui_cart_id', $uiCartId);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function addItem($data)
+    {
+        $this->items()->create($data);
+    }
 }
