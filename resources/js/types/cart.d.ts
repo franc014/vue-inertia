@@ -4,8 +4,13 @@ export interface Cart {
 }
 
 export interface CartItem {
-    id: string;
     title: string;
+    slug: string;
+    product_id: number;
     price: number;
+    tax: number;
     quantity: number;
+    total: number;
+    total_with_tax: number;
+
 }
