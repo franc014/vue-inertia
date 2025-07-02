@@ -31,14 +31,6 @@ router.on('start', (event) => {
 router.on('finish', (event) => {
     console.log(`Finished a visit to ${event.detail.visit.url}`);
 });
-
-/* onMounted(() => {
-    const cart = useCartStore();
-    if (!cart.id) {
-        cart.init('anewcart');
-    }
-    console.log('cart id', cart.id);
-}); */
 </script>
 
 <template>

@@ -7,12 +7,15 @@ use App\Models\TeamMember;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Context;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
 
 Route::get('/food', function () {
+    Log::info('getting context...', [Context::all()]);
+
     return Inertia::render('Food');
 })->name('food');
 
@@ -23,6 +26,8 @@ Route::get('/teams', function () {
 })->name('teams');
 
 Route::get('/products', function () {
+    Log::info('getting context...', [Context::all()]);
+
     return Inertia::render('Products', [
         'products' => Product::all(),
     ]);
@@ -32,11 +37,12 @@ Route::post('/cart/create', function () {
 
     $UICartId = request('id');
 
-    Log::info('UICartId', [$UICartId]);
-
-    return Cart::create([
+    $cart = Cart::create([
         'ui_cart_id' => $UICartId
     ]);
+
+    session()->put('cart', $cart);
+    return  ['ui_cart_id' => $cart->ui_cart_id, 'items'=> []];
 
 })->name('cart.create');
 
@@ -44,7 +50,7 @@ Route::post('/cart/show', function () {
 
     $cart = Cart::byUICartId(request('id'))->first();
 
-    return ['ui_cart_id' => $cart->ui_cart_id, 'items'=> []];
+    return ['ui_cart_id' => $cart->ui_cart_id, 'items'=> $cart->items];
 
 })->name('cart.show');
 

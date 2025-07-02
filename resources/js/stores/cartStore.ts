@@ -23,6 +23,7 @@ export const useCartStore = defineStore('cart', {
     state: () => ({
         id: '' ,
         items: [] as CartItem[],
+
     }),
     actions: {
         async init() {
@@ -31,6 +32,7 @@ export const useCartStore = defineStore('cart', {
                 const cart = JSON.parse(cartLS);
                 try {
                     const cartDB = await getCartFromDB(cart.id);
+                    console.log('got cart from DB', cartDB);
                     this.id = cartDB.data.ui_cart_id;
                     this.items = cartDB.data.items;
                 } catch (e: any) {
@@ -99,6 +101,8 @@ export const useCartStore = defineStore('cart', {
             const index = this.items.findIndex(i => i.slug === slug);
             this.items.splice(index, 1);
         },
+
+
 
 
     },

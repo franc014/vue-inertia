@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->string('ui_cart_id')->unique();
             $table->foreignIdFor(User::class)->nullable();
+            $table->string('ui_cart_id')->unique();
             $table->timestamps();
         });
     }

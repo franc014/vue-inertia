@@ -17,6 +17,7 @@ console.log(useCartStore());
     <header class="flex gap-2">
         <Link href="/" class="btn btn-primary">Home</Link>
         <Link href="/products" class="btn btn-primary">Products</Link>
+        <Link href="/food" class="btn btn-primary">Food</Link>
     </header>
     <div class="bg-fuchsia-100 p-10">
         <ProductsList :products="products" />

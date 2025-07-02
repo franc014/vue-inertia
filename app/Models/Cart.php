@@ -15,6 +15,11 @@ class Cart extends Model
         return $query->where('ui_cart_id', $uiCartId);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function items()
     {
         return $this->hasMany(CartItem::class);
@@ -24,4 +29,6 @@ class Cart extends Model
     {
         $this->items()->create($data);
     }
+
+
 }

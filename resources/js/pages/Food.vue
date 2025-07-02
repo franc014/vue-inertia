@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
 import Layout from '@/layouts/settings/Layout.vue';
 
@@ -22,6 +22,12 @@ console.log(team.name);
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     </Head>
+
+    <header class="flex gap-2">
+        <Link href="/" class="btn btn-primary">Home</Link>
+        <Link href="/products" class="btn btn-primary">Products</Link>
+        <Link href="/food" class="btn btn-primary">Food</Link>
+    </header>
 
     <div
         class="content container mx-auto flex min-h-screen flex-col space-y-6 bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]"
